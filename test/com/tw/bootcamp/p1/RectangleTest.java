@@ -1,8 +1,8 @@
-package com.bootcamp.p1;
+package com.tw.bootcamp.p1;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RectangleTest {
     @Test
@@ -23,6 +23,7 @@ class RectangleTest {
         Rectangle rectangle = Rectangle.createRectangle(2, 3);
         assertEquals(10, rectangle.parameter());
     }
+
     @Test
     void createRectangleShouldThrowIfCalledWithLessThanZeroLength() {
         assertThrows(InvalidLengthOfRectangleException.class, () -> Rectangle.createRectangle(-2, 2));

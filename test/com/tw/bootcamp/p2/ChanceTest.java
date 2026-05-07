@@ -1,4 +1,4 @@
-package com.bootcamp.p2;
+package com.tw.bootcamp.p2;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,14 +15,14 @@ public class ChanceTest {
     @Test
     void chanceOfGettingTailsShouldBePoint5() {
         Chance chanceOfGettingTails = new Chance(0.5);
-        assertEquals(0.5, chanceOfGettingTails.value());
+        assertEquals(new Chance(0.5), chanceOfGettingTails);
     }
 
     @Test
     void chanceOfNotGettingTailsShouldBePoint5() {
         Chance chanceOfGettingTails = new Chance(0.5);
         Chance chanceOfNotGettingTails = chanceOfGettingTails.not();
-        assertEquals(0.5, chanceOfNotGettingTails.value());
+        assertEquals(new Chance(0.5), chanceOfNotGettingTails);
     }
 
     @Test
@@ -30,7 +30,7 @@ public class ChanceTest {
         Chance firstCoinChanceOfTails = new Chance(0.5);
         Chance secondCoinChanceOfTails = new Chance(0.5);
         Chance chanceOfGettingTailsOnBoth = firstCoinChanceOfTails.and(secondCoinChanceOfTails);
-        assertEquals(0.25, chanceOfGettingTailsOnBoth.value());
+        assertEquals(new Chance(0.25), chanceOfGettingTailsOnBoth);
     }
 
     @Test
@@ -38,6 +38,6 @@ public class ChanceTest {
         Chance firstCoinChanceOfTails = new Chance(0.5);
         Chance secondCoinChanceOfTails = new Chance(0.5);
         Chance chanceOfGettingTailsOnAtLeastOneCoin = firstCoinChanceOfTails.or(secondCoinChanceOfTails);
-        assertEquals(0.75, chanceOfGettingTailsOnAtLeastOneCoin.value());
+        assertEquals(new Chance(0.75), chanceOfGettingTailsOnAtLeastOneCoin);
     }
 }

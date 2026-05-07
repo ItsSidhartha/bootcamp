@@ -1,4 +1,4 @@
-package com.bootcamp.p1;
+package com.tw.bootcamp.p1;
 
 public class InvalidWidthOfRectangleException extends InvalidSideException {
     public InvalidWidthOfRectangleException() {
