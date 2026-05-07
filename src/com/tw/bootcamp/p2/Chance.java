@@ -5,20 +5,25 @@ import java.util.Objects;
 public final class Chance {
     private final double value;
 
-    public Chance(double value) {
+    private Chance(double value) {
         this.value = value;
     }
 
-    public Chance not() {
-        return new Chance(1 - value);
+    public static Chance create(double value) throws InvalidProbabilityException {
+        if(value <  0 || value> 1) throw new InvalidProbabilityException();
+        return new Chance(value);
     }
 
-    public Chance and(Chance other) {
-        return new Chance(value * other.value);
+    public Chance not() throws InvalidProbabilityException {
+        return create(1 - value);
     }
 
-    public Chance or(Chance other) {
-        return new Chance(value + other.value - this.and(other).value);
+    public Chance and(Chance other) throws InvalidProbabilityException {
+        return create(value * other.value);
+    }
+
+    public Chance or(Chance other) throws InvalidProbabilityException {
+        return create(value + other.value - this.and(other).value);
     }
 
     @Override
@@ -26,7 +31,7 @@ public final class Chance {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
         var that = (Chance) obj;
-        return Double.doubleToLongBits(this.value) == Double.doubleToLongBits(that.value);
+        return Math.abs(Double.doubleToLongBits(this.value) - Double.doubleToLongBits(that.value)) <= 0.00001;
     }
 
     @Override

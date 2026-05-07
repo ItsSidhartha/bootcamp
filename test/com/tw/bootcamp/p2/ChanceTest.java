@@ -3,41 +3,61 @@ package com.tw.bootcamp.p2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ChanceTest {
     @Test
-    void chanceOfSameTotalPossibilitiesAndFavorableShouldBeEqual() {
-        Chance c1 = new Chance(0.5);
-        Chance c2 = new Chance(0.5);
+    void chanceOfSameTotalPossibilitiesAndFavorableShouldBeEqual() throws InvalidProbabilityException {
+        Chance c1 = Chance.create(0.5);
+        Chance c2 = Chance.create(0.5);
         assertEquals(c1, c2);
     }
 
     @Test
-    void chanceOfGettingTailsShouldBePoint5() {
-        Chance chanceOfGettingTails = new Chance(0.5);
-        assertEquals(new Chance(0.5), chanceOfGettingTails);
+    void chanceOfGettingTailsShouldBePoint5() throws InvalidProbabilityException {
+        Chance chanceOfGettingTails = Chance.create(0.5);
+        assertEquals(Chance.create(0.5), chanceOfGettingTails);
     }
 
     @Test
-    void chanceOfNotGettingTailsShouldBePoint5() {
-        Chance chanceOfGettingTails = new Chance(0.5);
+    void chanceOfNotGettingTailsShouldBePoint5() throws InvalidProbabilityException {
+        Chance chanceOfGettingTails = Chance.create(0.5);
         Chance chanceOfNotGettingTails = chanceOfGettingTails.not();
-        assertEquals(new Chance(0.5), chanceOfNotGettingTails);
+        assertEquals(Chance.create(0.5), chanceOfNotGettingTails);
     }
 
     @Test
-    void chanceOfGettingTailsWhenTwoCoinsAreFlippedShouldBePoint75() {
-        Chance firstCoinChanceOfTails = new Chance(0.5);
-        Chance secondCoinChanceOfTails = new Chance(0.5);
+    void chanceOfGettingTailsWhenTwoCoinsAreFlippedShouldBePoint75() throws InvalidProbabilityException {
+        Chance firstCoinChanceOfTails = Chance.create(0.5);
+        Chance secondCoinChanceOfTails = Chance.create(0.5);
         Chance chanceOfGettingTailsOnBoth = firstCoinChanceOfTails.and(secondCoinChanceOfTails);
-        assertEquals(new Chance(0.25), chanceOfGettingTailsOnBoth);
+        assertEquals(Chance.create(0.25), chanceOfGettingTailsOnBoth);
     }
 
     @Test
-    void chanceOfGettingAtLeastOneTailsOnFlippingTwoCoins() {
-        Chance firstCoinChanceOfTails = new Chance(0.5);
-        Chance secondCoinChanceOfTails = new Chance(0.5);
+    void chanceOfGettingAtLeastOneTailsOnFlippingTwoCoins() throws InvalidProbabilityException {
+        Chance firstCoinChanceOfTails = Chance.create(0.5);
+        Chance secondCoinChanceOfTails = Chance.create(0.5);
         Chance chanceOfGettingTailsOnAtLeastOneCoin = firstCoinChanceOfTails.or(secondCoinChanceOfTails);
-        assertEquals(new Chance(0.75), chanceOfGettingTailsOnAtLeastOneCoin);
+        assertEquals(Chance.create(0.75), chanceOfGettingTailsOnAtLeastOneCoin);
+    }
+
+    @Test
+    void chanceOfGettingTailsInCoinAndThreeInDice() throws InvalidProbabilityException {
+        Chance chanceOfTailsInCoin = Chance.create(0.5);
+        Chance chanceOfThreeInDice = Chance.create(0.1667);
+        Chance chanceOfGettingTailsAndDice = chanceOfThreeInDice.and(chanceOfTailsInCoin);
+        assertEquals(Chance.create(0.08335), chanceOfGettingTailsAndDice);
+    }
+
+    @Test
+    void creatingChanceWithValueMore1ShouldThrow() {
+        InvalidProbabilityException exception = assertThrows(InvalidProbabilityException.class, () -> Chance.create(2));
+        assertEquals("Probability can only be between 0 and 1", exception.getMessage());
+    }
+    @Test
+    void creatingChanceWithValueLessThan0ShouldThrow() {
+        InvalidProbabilityException exception = assertThrows(InvalidProbabilityException.class, () -> Chance.create(-1));
+        assertEquals("Probability can only be between 0 and 1", exception.getMessage());
     }
 }
