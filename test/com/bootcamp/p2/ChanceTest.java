@@ -20,8 +20,8 @@ public class ChanceTest {
 
     @Test
     void chanceOfNotGettingTailsShouldBePoint5() {
-        Chance chance = new Chance(0.5);
-        Chance chanceOfNotGettingTails = chance.not();
+        Chance chanceOfGettingTails = new Chance(0.5);
+        Chance chanceOfNotGettingTails = chanceOfGettingTails.not();
         assertEquals(0.5, chanceOfNotGettingTails.value());
     }
 
@@ -34,8 +34,10 @@ public class ChanceTest {
     }
 
     @Test
-    void chanceOfGetting3INADice() {
-        Chance chanceOfGettingThree = new Chance(0.1667);
-        assertEquals(0.1667, chanceOfGettingThree.value());
+    void chanceOfGettingAtLeastOneTailsOnFlippingTwoCoins() {
+        Chance firstCoinChanceOfTails = new Chance(0.5);
+        Chance secondCoinChanceOfTails = new Chance(0.5);
+        Chance chanceOfGettingTailsOnAtLeastOneCoin = firstCoinChanceOfTails.or(secondCoinChanceOfTails);
+        assertEquals(0.75, chanceOfGettingTailsOnAtLeastOneCoin.value());
     }
 }
