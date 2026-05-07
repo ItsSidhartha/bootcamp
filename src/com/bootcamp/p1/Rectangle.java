@@ -11,11 +11,22 @@ public class Rectangle {
         this.width = width;
     }
 
-    public static Rectangle createRectangle(double length, double width) {
+    public static Rectangle createRectangle(double length, double width) throws InvalidSideException {
+        if(length <= 0) {
+            throw new InvalidLengthOfRectangleException();
+        }
+
+        if(width <= 0) {
+            throw new InvalidWidthOfRectangleException();
+        }
+
         return new Rectangle(length, width);
     }
 
-    public static Rectangle createSquare(double side) {
+    public static Rectangle createSquare(double side) throws InvalidSideException {
+        if(side <= 0) {
+            throw new InvalidSideExceptionOfSquare();
+        }
         return new Rectangle(side, side);
     }
 
