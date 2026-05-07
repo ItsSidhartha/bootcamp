@@ -27,13 +27,15 @@ public class ChanceTest {
 
     @Test
     void chanceOfGettingTailsWhenTwoCoinsAreFlippedShouldBePoint75() {
-        Chance chanceOfGettingTails = new Chance(0.75);
-        assertEquals(0.75, chanceOfGettingTails.value());
+        Chance firstCoinChanceOfTails = new Chance(0.5);
+        Chance secondCoinChanceOfTails = new Chance(0.5);
+        Chance chanceOfGettingTailsOnBoth = firstCoinChanceOfTails.and(secondCoinChanceOfTails);
+        assertEquals(0.25, chanceOfGettingTailsOnBoth.value());
     }
+
     @Test
     void chanceOfGetting3INADice() {
         Chance chanceOfGettingThree = new Chance(0.1667);
         assertEquals(0.1667, chanceOfGettingThree.value());
     }
-
 }
