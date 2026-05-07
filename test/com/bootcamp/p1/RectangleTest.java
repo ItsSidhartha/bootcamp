@@ -16,6 +16,12 @@ class RectangleTest {
     void rectangleOfSameHeightAndWidthShouldBeEqual() {
         Rectangle r1 = new Rectangle(2, 3);
         Rectangle r2 = new Rectangle(2, 3);
-        assertTrue(r1.equals(r2));
+        assertEquals(r1, r2);
+    }
+
+    @Test
+    void parameterOfRectangleOf2X3ShouldBe10() {
+        Rectangle rectangle = new Rectangle(2, 3);
+        assertEquals(10, rectangle.parameter());
     }
 }

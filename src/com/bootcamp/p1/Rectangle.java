@@ -3,26 +3,30 @@ package com.bootcamp.p1;
 import java.util.Objects;
 
 public class Rectangle {
-    private final double height;
+    private final double length;
     private final double width;
 
-    public Rectangle(double height, double width) {
-        this.height = height;
+    public Rectangle(double length, double width) {
+        this.length = length;
         this.width = width;
     }
 
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Rectangle rectangle)) return false;
-        return Double.compare(height, rectangle.height) == 0 && Double.compare(width, rectangle.width) == 0;
+        return Double.compare(length, rectangle.length) == 0 && Double.compare(width, rectangle.width) == 0;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(height, width);
+        return Objects.hash(length, width);
     }
 
     public double area() {
-        return height * width;
+        return length * width;
+    }
+
+    public double parameter() {
+        return (length + width) * 2;
     }
 }
