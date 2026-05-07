@@ -8,20 +8,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class RectangleTest {
     @Test
     void areaOfRectOf2X3ShouldBe6() {
-        Rectangle rectangle = new Rectangle(2, 3);
+        Rectangle rectangle = Rectangle.createRectangle(2, 3);
         assertEquals(6, rectangle.area());
     }
 
     @Test
     void rectangleOfSameHeightAndWidthShouldBeEqual() {
-        Rectangle r1 = new Rectangle(2, 3);
-        Rectangle r2 = new Rectangle(2, 3);
+        Rectangle r1 = Rectangle.createRectangle(2, 3);
+        Rectangle r2 = Rectangle.createRectangle(2, 3);
         assertEquals(r1, r2);
     }
 
     @Test
     void parameterOfRectangleOf2X3ShouldBe10() {
-        Rectangle rectangle = new Rectangle(2, 3);
+        Rectangle rectangle = Rectangle.createRectangle(2, 3);
         assertEquals(10, rectangle.parameter());
     }
 }

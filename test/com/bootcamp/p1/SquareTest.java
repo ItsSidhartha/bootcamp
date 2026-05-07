@@ -7,20 +7,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SquareTest {
     @Test
     void twoSquareWithSameSideShouldBeEqual() {
-        Square s1 = new Square(2);
-        Square s2 = new Square(2);
-        assertEquals(s2, s1);
+        Rectangle square1 = Rectangle.createSquare(2);
+        Rectangle square2 = Rectangle.createSquare(2);
+
+        assertEquals(square1,square2);
     }
 
     @Test
     void areaOfASquareOfSide3ShouldBeNine() {
-        Square square = new Square(3);
+        Rectangle square = Rectangle.createSquare(3);
         assertEquals(9, square.area());
     }
 
     @Test
-    void parameterOfSquareOfSide3SouldBe12() {
-        Square square = new Square(3);
+    void parameterOfSquareOfSide3ShouldBe12() {
+        Rectangle square = Rectangle.createSquare(3);
         assertEquals(12, square.parameter());
     }
 }

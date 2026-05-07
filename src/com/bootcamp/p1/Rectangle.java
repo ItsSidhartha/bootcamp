@@ -6,9 +6,17 @@ public class Rectangle {
     private final double length;
     private final double width;
 
-    public Rectangle(double length, double width) {
+    private Rectangle(double length, double width) {
         this.length = length;
         this.width = width;
+    }
+
+    public static Rectangle createRectangle(double length, double width) {
+        return new Rectangle(length, width);
+    }
+
+    public static Rectangle createSquare(double side) {
+        return new Rectangle(side, side);
     }
 
     @Override
