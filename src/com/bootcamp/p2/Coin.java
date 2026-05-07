@@ -1,19 +1,10 @@
 package com.bootcamp.p2;
 
-import java.util.List;
-
 public class Coin {
-    public static final List<String> POSSIBILITIES = List.of("Heads", "Tails");
+    public static final int TOTAL_POSSIBILITIES = 2;
+    public static final int CHANCE_OF_ONE_OUTCOME = 1;
 
-
-    public double chance(String face) {
-        double totalPossibilities = POSSIBILITIES.size();
-        double favorableOutcomes = POSSIBILITIES.stream().filter(x -> x.equals(face)).toArray().length;
-
-        return Probability.calculatePossibility(totalPossibilities, favorableOutcomes);
-    }
-
-    public double chanceOfNotGetting(String face) {
-        return 1 - chance(face);
+    public Chance chance(String face) {
+        return new Chance(TOTAL_POSSIBILITIES, CHANCE_OF_ONE_OUTCOME);
     }
 }
