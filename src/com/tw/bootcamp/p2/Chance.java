@@ -38,5 +38,4 @@ public final class Chance {
     public int hashCode() {
         return Objects.hash(value);
     }
-
 }
