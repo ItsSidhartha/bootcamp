@@ -2,7 +2,7 @@ package com.tw.bootcamp.p3;
 
 import java.util.Objects;
 
-public abstract class Measurement{
+public abstract class Measurement<T> {
     protected final Units unit;
     protected final double value;
 
