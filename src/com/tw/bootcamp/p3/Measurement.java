@@ -3,8 +3,8 @@ package com.tw.bootcamp.p3;
 import java.util.Objects;
 
 public abstract class Measurement{
-    private final Units unit;
-    private final double value;
+    protected final Units unit;
+    protected final double value;
 
     public Measurement(Units unit, double value) {
         this.unit = unit;

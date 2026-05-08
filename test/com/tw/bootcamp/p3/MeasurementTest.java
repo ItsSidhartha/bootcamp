@@ -3,6 +3,7 @@ package com.tw.bootcamp.p3;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class MeasurementTest {
     @Test
@@ -33,5 +34,21 @@ public class MeasurementTest {
         Volume threePointSevenEightLiters = new Volume(VolumeUnit.LITER, 3.78);
 
         assertEquals(oneGallon, threePointSevenEightLiters);
+    }
+
+    @Test
+    void oneLiterShouldNotBeEqualsToOneCm() {
+        Volume oneLiter = new Volume(VolumeUnit.LITER, 1);
+        Length oneCM = new Length(LengthUnits.CM, 1);
+
+        assertNotEquals(oneLiter, oneCM);
+    }
+
+    @Test
+    void additionOfTwoInchAndTwoInchShouldBeFourInch() {
+        Length twoInch = new Length(LengthUnits.INCH, 2);
+        Length fourInch = new Length(LengthUnits.INCH, 4);
+
+        assertEquals(fourInch, twoInch.add(twoInch));
     }
 }
