@@ -10,4 +10,13 @@ public class Volume extends  Measurement{
         if(!(o instanceof Volume)) return false;
         return super.equals(o);
     }
+
+    public Volume add(Volume other) {
+        if(this.unit == other.unit) {
+            return new Volume((VolumeUnit) this.unit, this.value + other.value);
+        }
+
+        double sum = this.unit.toBase(this.value) + other.unit.toBase(other.value);
+        return new Volume(VolumeUnit.LITER, sum);
+    }
 }

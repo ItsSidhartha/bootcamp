@@ -14,7 +14,7 @@ public abstract class Measurement{
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Measurement other)) return false;
-        return unit.toBase(value) == other.unit.toBase(other.value);
+        return Math.abs(unit.toBase(value) - other.unit.toBase(other.value)) <= 0.0001;
     }
 
     @Override

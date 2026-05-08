@@ -1,15 +1,14 @@
 package com.tw.bootcamp.p3;
 
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MeasurementTest {
     @Test
     void oneFeetShouldBeEqualsToTwelveInches() {
         Length twelveInches = new Length(LengthUnits.INCH, 12);
         Length oneFeet = new Length(LengthUnits.FEET, 1);
+
         assertEquals(oneFeet, twelveInches);
     }
 
@@ -17,6 +16,7 @@ public class MeasurementTest {
     void twoInchShouldBeEqualsToFiveCentimeter() {
         Length twoInches = new Length(LengthUnits.INCH, 2);
         Length fiveCm = new Length(LengthUnits.CM, 5);
+
         assertEquals(twoInches,fiveCm);
     }
 
@@ -25,6 +25,7 @@ public class MeasurementTest {
     void tenMMShouldBeEqualsToOneCentimeter() {
         Length tenMM = new Length(LengthUnits.MM, 10);
         Length oneCm = new Length(LengthUnits.CM, 1);
+
         assertEquals(tenMM,oneCm);
     }
 
@@ -56,7 +57,6 @@ public class MeasurementTest {
     void additionOfTwoInchesAndTwoPointFiveCMShouldBeThreeInches() {
         Length twoInches = new Length(LengthUnits.INCH, 2);
         Length twoPointFiveCM = new Length(LengthUnits.CM, 2.5);
-
         Length threeInches = new Length(LengthUnits.INCH, 3);
 
         assertEquals(threeInches, twoInches.add(twoPointFiveCM));
@@ -66,9 +66,17 @@ public class MeasurementTest {
     void additionOfTwoInchesAndTwoFeetShouldBeTwentySixInches() {
         Length twoInches = new Length(LengthUnits.INCH, 2);
         Length twoFeet = new Length(LengthUnits.FEET, 2);
-
         Length twentySixInches = new Length(LengthUnits.INCH, 26);
 
         assertEquals(twentySixInches, twoInches.add(twoFeet));
+    }
+
+    @Test
+    void additionOfOneGallonAndOneLiterShouldBeFourPointSevenLiters() {
+        Volume oneGallon = new Volume(VolumeUnit.GALLON, 1);
+        Volume oneLiter = new Volume(VolumeUnit.LITER, 1);
+        Volume fourPointSevenLiter = new Volume(VolumeUnit.LITER, 4.78);
+
+        assertEquals(fourPointSevenLiter, oneGallon.add(oneLiter));
     }
 }
