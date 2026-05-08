@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class LengthTest {
+public class MeasurementTest {
     @Test
     void oneFeetShouldBeEqualsToTwelveInches() {
         Length twelveInches = new Length(LengthUnits.INCH, 12);
         Length oneFeet = new Length(LengthUnits.FEET, 1);
-        assertEquals(oneFeet,twelveInches);
+        assertEquals(oneFeet, twelveInches);
     }
 
     @Test
@@ -27,12 +27,11 @@ public class LengthTest {
         assertEquals(tenMM,oneCm);
     }
 
-//    @Test
-//    void tenMMShouldBeEqualsToOneCentimeter() {
-//        Length tenMM = new Length(Unit.MM, 10);
-//        Length oneCm = new Length(Unit.CM, 1);
-//        assertEquals(tenMM,oneCm);
-//    }
+    @Test
+    void oneGallonShouldBeEqualsToThreePointSevenEightLiters() {
+        Volume oneGallon = new Volume(VolumeUnit.GALLON, 1);
+        Volume threePointSevenEightLiters = new Volume(VolumeUnit.LITER, 3.78);
 
-
+        assertEquals(oneGallon, threePointSevenEightLiters);
+    }
 }
