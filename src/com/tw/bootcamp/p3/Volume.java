@@ -1,8 +1,14 @@
 package com.tw.bootcamp.p3;
 
 public class Volume extends  Measurement{
-    public Volume(VolumeUnit unit, double value) {
+    private Volume(VolumeUnit unit, double value) {
         super(unit, value);
+    }
+
+    public static Volume create(VolumeUnit unit, double value) throws InvalidValueException {
+        if (value <= 0) throw new InvalidValueException();
+
+        return new Volume(unit, value);
     }
 
     @Override
@@ -11,12 +17,12 @@ public class Volume extends  Measurement{
         return super.equals(o);
     }
 
-    public Volume add(Volume other) {
+    public Volume add(Volume other) throws InvalidValueException {
         if(this.unit == other.unit) {
-            return new Volume((VolumeUnit) this.unit, this.value + other.value);
+            return create((VolumeUnit) this.unit, this.value + other.value);
         }
 
         double sum = this.unit.toBase(this.value) + other.unit.toBase(other.value);
-        return new Volume(VolumeUnit.LITER, sum);
+        return create(VolumeUnit.LITER, sum);
     }
 }
