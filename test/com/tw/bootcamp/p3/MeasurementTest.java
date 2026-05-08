@@ -51,4 +51,24 @@ public class MeasurementTest {
 
         assertEquals(fourInch, twoInch.add(twoInch));
     }
+
+    @Test
+    void additionOfTwoInchesAndTwoPointFiveCMShouldBeThreeInches() {
+        Length twoInches = new Length(LengthUnits.INCH, 2);
+        Length twoPointFiveCM = new Length(LengthUnits.CM, 2.5);
+
+        Length threeInches = new Length(LengthUnits.INCH, 3);
+
+        assertEquals(threeInches, twoInches.add(twoPointFiveCM));
+    }
+
+    @Test
+    void additionOfTwoInchesAndTwoFeetShouldBeTwentySixInches() {
+        Length twoInches = new Length(LengthUnits.INCH, 2);
+        Length twoFeet = new Length(LengthUnits.FEET, 2);
+
+        Length twentySixInches = new Length(LengthUnits.INCH, 26);
+
+        assertEquals(twentySixInches, twoInches.add(twoFeet));
+    }
 }

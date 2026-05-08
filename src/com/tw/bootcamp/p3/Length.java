@@ -16,6 +16,7 @@ public class Length extends Measurement{
             return new Length((LengthUnits) this.unit, this.value + other.value);
         }
 
-        return null;
+        double sum = this.unit.toBase(this.value) + other.unit.toBase(other.value);
+        return new Length(LengthUnits.INCH, sum);
     }
 }
