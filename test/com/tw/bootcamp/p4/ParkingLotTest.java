@@ -15,25 +15,16 @@ public class ParkingLotTest {
     @Test
     void ShouldBeAbleToAddCar() throws NotEnoughSpaceInParkingException {
         ParkingLot parkingLot = new ParkingLot(2, "p1");
-        Car car1 = new Car();
-
-        int location1 = parkingLot.park(car1);
-        assertFalse(parkingLot.isFull());
-
-        Car car2 = new Car();
-        int location2 = parkingLot.park(car2);
-
-        assertEquals(1, parkingLot.getOccupancyRatio());
+        assertTrue(parkingLot.getOccupancyRatio() < 1);
+        parkingLot.park(new Car());
+        assertEquals(0.5, parkingLot.getOccupancyRatio());
     }
 
     @Test
     void parkingCarInAFullParkingShouldThrow() throws NotEnoughSpaceInParkingException {
         ParkingLot parkingLot = new ParkingLot(2, "p1");
-        Car car1 = new Car();
-        Car car2 = new Car();
-
-        parkingLot.park(car1);
-        parkingLot.park(car2);
+        parkingLot.park(new Car());
+        parkingLot.park(new Car());
 
         Car car3 = new Car();
         assertThrows(NotEnoughSpaceInParkingException.class, () -> parkingLot.park(car3));

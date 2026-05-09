@@ -20,7 +20,7 @@ public class ParkingLotRepository {
         StringBuilder stringBuilder = new StringBuilder();
 
         parkingLots.forEach((id, parkingLot)->{
-            stringBuilder.append(id).append(" -> ").append(parkingLot.isFull() ? "Full": "Space Available").append("\n");
+            stringBuilder.append(id).append(" -> ").append(parkingLot.getOccupancyRatio() == 1 ? "Full": "Space Available").append("\n");
         });
 
         return stringBuilder.toString();

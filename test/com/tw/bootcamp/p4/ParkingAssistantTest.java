@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class parkingAssistantTest {
+public class ParkingAssistantTest {
     @Test
     void parkingAssistantShouldReturnDetailsAboutAllParkingLots() {
         ParkingLotRepository parkingLotRepository = new ParkingLotRepository();
@@ -16,13 +16,16 @@ public class parkingAssistantTest {
         when(parkingLot1.getId()).thenReturn("p1");
         when(parkingLot2.getId()).thenReturn("p2");
 
-        when(parkingLot1.isFull()).thenReturn(true);
-        when(parkingLot2.isFull()).thenReturn(false);
+        when(parkingLot1.getOccupancyRatio()).thenReturn(0.2);
+        when(parkingLot2.getOccupancyRatio()).thenReturn(1.0);
 
         parkingLotRepository.add(parkingLot1);
         parkingLotRepository.add(parkingLot2);
 
         ParkingAssistant parkingAssistant = new ParkingAssistant(parkingLotRepository);
-        assertEquals("p1 -> Full\n" + "p2 -> Space Available\n", parkingAssistant.display());
+        assertEquals("""
+                p1 -> Space Available
+                p2 -> Full
+                """, parkingAssistant.display());
     }
 }
