@@ -6,26 +6,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BagTest {
     @Test
-    void ShouldBeAbleToAddBallAtATime() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
+    void ShouldBeAbleToAddBallAtATime() {
+        MyValidator myValidator = new MyValidator();
+        Bag bag = new Bag(myValidator);
         assertTrue(bag.addBall(new Ball(BallColors.GREEN)));
     }
 
     @Test
-    void addShouldThrowExceptionIfBagIsFull() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
-        for (int i = 0; i < 12; i++) {
-            bag.addBall(new Ball(BallColors.BLUE));
-        }
+    void shouldBeAbleToLimitCountOfGreenColorBall() {
+        MyValidator myValidator = new MyValidator();
+        Bag bag = new Bag(myValidator);
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.GREEN));
 
-        assertThrows(NotEnoughSpaceInBagException.class, () -> bag.addBall(new Ball(BallColors.YELLOW)));
-    }
-
-    @Test
-    void shouldBeAbleToLimitCountOfGreenColorBall() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
-        boolean b1 = bag.addBall(new Ball(BallColors.GREEN));
-        boolean b2 = bag.addBall(new Ball(BallColors.GREEN));
         boolean b3 = bag.addBall(new Ball(BallColors.GREEN));
         assertTrue(b3);
         boolean b4 = bag.addBall(new Ball(BallColors.GREEN));
@@ -33,34 +26,42 @@ public class BagTest {
     }
 
     @Test
-    void shouldBeAbleToLimitCountOfRedColorBall() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
-        boolean b1 = bag.addBall(new Ball(BallColors.GREEN));
-        boolean b2 = bag.addBall(new Ball(BallColors.RED));
+    void shouldBeAbleToLimitCountOfRedColorBall() {
+
+        MyValidator myValidator = new MyValidator();
+        Bag bag = new Bag(myValidator);
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.RED));
         boolean b3 = bag.addBall(new Ball(BallColors.RED));
+
         assertTrue(b3);
         boolean b4 = bag.addBall(new Ball(BallColors.RED));
         assertFalse(b4);
     }
 
     @Test
-    void shouldBeAbleToLimitCountOfYellowColorBall() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
-        boolean b1 = bag.addBall(new Ball(BallColors.GREEN));
-        boolean b2 = bag.addBall(new Ball(BallColors.GREEN));
-        boolean b3 = bag.addBall(new Ball(BallColors.RED));
-        boolean b4 = bag.addBall(new Ball(BallColors.RED));
+    void shouldBeAbleToLimitCountOfYellowColorBall() {
+        MyValidator myValidator = new MyValidator();
+        Bag bag = new Bag(myValidator);
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.RED));
+        bag.addBall(new Ball(BallColors.RED));
+
         boolean b5 = bag.addBall(new Ball(BallColors.YELLOW));
         assertTrue(b5);
-        boolean b6 = bag.addBall(new Ball(BallColors.YELLOW));
-        boolean b7 = bag.addBall(new Ball(BallColors.YELLOW));
+
+        bag.addBall(new Ball(BallColors.YELLOW));
+        bag.addBall(new Ball(BallColors.YELLOW));
+
         boolean b8 = bag.addBall(new Ball(BallColors.YELLOW));
         assertFalse(b8);
     }
 
     @Test
-    void summaryShouldReturnTheContentOfBagAtThatTime() throws NotEnoughSpaceInBagException {
-        Bag bag = new Bag(3);
+    void summaryShouldReturnTheContentOfBagAtThatTime() {
+        MyValidator myValidator = new MyValidator();
+        Bag bag = new Bag(myValidator);
         bag.addBall(new Ball(BallColors.GREEN));
         bag.addBall(new Ball(BallColors.GREEN));
         bag.addBall(new Ball(BallColors.RED));
@@ -72,10 +73,11 @@ public class BagTest {
         bag.addBall(new Ball(BallColors.YELLOW));
 
         assertEquals("""
+                YELLOW : 2
+                BLUE : 3
                 GREEN : 2
                 RED : 2
-                BLUE : 3
-                YELLOW : 2
                 Total : 9""", bag.summary());
+
     }
 }

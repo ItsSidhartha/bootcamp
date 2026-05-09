@@ -1,53 +1,37 @@
 package com.tw.bootcamp.p5;
 
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Bag {
-    private final int capacity = 12;
-    private final int greenBallLimit;
-    HashMap<BallColors, HashSet<Ball>> balls = new HashMap<>();
-    private int occupied;
+    private final Validator validator;
+    HashMap<BallColors, Integer> balls = new HashMap<>();
 
-    public Bag(int greenBallLimit) {
-        this.greenBallLimit = greenBallLimit;
+    public Bag(Validator validator) {
+        this.validator = validator;
     }
 
-    public boolean addBall(Ball ball) throws NotEnoughSpaceInBagException {
-        if (occupied == capacity) throw new NotEnoughSpaceInBagException();
-        balls.putIfAbsent(ball.getColor(), new HashSet<>());
+    public boolean addBall(Ball ball) {
+        balls.putIfAbsent(ball.getColor(), 0);
 
-        if (canAdd(ball)) {
-            boolean isAdded = balls.get(ball.getColor()).add(ball);
-
-            if (!isAdded) return false;
-            occupied++;
-            return true;
-        }
-        return false;
+        if (!validator.isValid(new BagState(balls), ball)) return false;
+        balls.compute(ball.getColor(), (color, count) -> count + 1);
+        return true;
     }
-
-    private boolean canAdd(Ball ball) {
-        return switch (ball.getColor()) {
-            case GREEN -> greenBallLimit > getSize(ball.getColor());
-            case RED -> getSize(BallColors.GREEN) * 2 > getSize(ball.getColor());
-            case YELLOW -> occupied * 0.4 > getSize(ball.getColor());
-            case BLUE -> true;
-        };
-    }
-
-    private int getSize(BallColors color) {
-        if (!balls.containsKey(color)) return 0;
-        return balls.get(color).size();
-    }
-
 
     public String summary() {
         StringBuilder summary = new StringBuilder();
-        balls.forEach((color, list) -> {
-            summary.append(color).append(" : ").append(list.size()).append("\n");
+        AtomicInteger total = new AtomicInteger();
+
+        balls.forEach((color, count) -> {
+            total.addAndGet(count);
+            summary.append(color).append(" : ").append(count).append("\n");
         });
-         summary.append("Total : ").append(occupied);
-         return summary.toString();
+
+        summary.append("Total : ").append(total.get());
+
+        return summary.toString();
     }
+
+
 }
