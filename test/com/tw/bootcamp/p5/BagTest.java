@@ -57,4 +57,25 @@ public class BagTest {
         boolean b8 = bag.addBall(new Ball(BallColors.YELLOW));
         assertFalse(b8);
     }
+
+    @Test
+    void summaryShouldReturnTheContentOfBagAtThatTime() throws NotEnoughSpaceInBagException {
+        Bag bag = new Bag(3);
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.GREEN));
+        bag.addBall(new Ball(BallColors.RED));
+        bag.addBall(new Ball(BallColors.RED));
+        bag.addBall(new Ball(BallColors.BLUE));
+        bag.addBall(new Ball(BallColors.BLUE));
+        bag.addBall(new Ball(BallColors.BLUE));
+        bag.addBall(new Ball(BallColors.YELLOW));
+        bag.addBall(new Ball(BallColors.YELLOW));
+
+        assertEquals("""
+                GREEN : 2
+                RED : 2
+                BLUE : 3
+                YELLOW : 2
+                Total : 9""", bag.summary());
+    }
 }

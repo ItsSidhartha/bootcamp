@@ -40,4 +40,14 @@ public class Bag {
         if (!balls.containsKey(color)) return 0;
         return balls.get(color).size();
     }
+
+
+    public String summary() {
+        StringBuilder summary = new StringBuilder();
+        balls.forEach((color, list) -> {
+            summary.append(color).append(" : ").append(list.size()).append("\n");
+        });
+         summary.append("Total : ").append(occupied);
+         return summary.toString();
+    }
 }
