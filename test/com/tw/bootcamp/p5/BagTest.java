@@ -9,16 +9,16 @@ public class BagTest {
     @Test
     void ShouldBeAbleToAddBallAtATime() throws NotEnoughSpaceInBagException {
         Bag bag = new Bag();
-        assertTrue(bag.addBall());
+        assertTrue(bag.addBall(new Ball(BallColors.RED)));
     }
 
     @Test
     void addShouldThrowExceptionIfBagIsFull() throws NotEnoughSpaceInBagException {
         Bag bag = new Bag();
         for (int i = 0; i < 12; i++) {
-            bag.addBall();
+            bag.addBall(new Ball(BallColors.BLUE));
         }
 
-        assertThrows(NotEnoughSpaceInBagException.class, bag::addBall);
+        assertThrows(NotEnoughSpaceInBagException.class, () -> bag.addBall(new Ball(BallColors.YELLOW)));
     }
 }
