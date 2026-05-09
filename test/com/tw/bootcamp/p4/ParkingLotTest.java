@@ -8,7 +8,8 @@ public class ParkingLotTest {
     @Test
     void parkingAreaShouldTakeSizeAndTellWhenItIsFull() {
         ParkingLot parkingLot = new ParkingLot(5, "p1");
-        assertFalse(parkingLot.isFull());
+        double occupancyRatio = parkingLot.getOccupancyRatio();
+        assertEquals(0, occupancyRatio);
     }
 
     @Test
@@ -21,7 +22,8 @@ public class ParkingLotTest {
 
         Car car2 = new Car();
         int location2 = parkingLot.park(car2);
-        assertTrue(parkingLot.isFull());
+
+        assertEquals(1, parkingLot.getOccupancyRatio());
     }
 
     @Test
@@ -35,5 +37,16 @@ public class ParkingLotTest {
 
         Car car3 = new Car();
         assertThrows(NotEnoughSpaceInParkingException.class, () -> parkingLot.park(car3));
+    }
+
+    @Test
+    void isAlmostFullShouldReturnTrueIfEightyPercentOfTheLotIsFull() throws NotEnoughSpaceInParkingException {
+        ParkingLot parkingLot = new ParkingLot(5, "p1");
+        parkingLot.park(new Car());
+        parkingLot.park(new Car());
+        assertTrue(parkingLot.getOccupancyRatio() < 0.8);
+        parkingLot.park(new Car());
+        parkingLot.park(new Car());
+        assertTrue(parkingLot.getOccupancyRatio() >= 0.8);
     }
 }

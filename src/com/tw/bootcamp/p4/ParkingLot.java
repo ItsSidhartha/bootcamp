@@ -26,4 +26,12 @@ public class ParkingLot {
     public String getId() {
         return id;
     }
+
+    public boolean isAlmostFull() {
+        return (double) cars.size() / capacity >= 0.8;
+    }
+
+    public double getOccupancyRatio() {
+       return (double) cars.size() / capacity;
+    }
 }
